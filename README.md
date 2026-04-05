@@ -22,6 +22,7 @@ To improve algorithmic efficiency, I implemented a Quadtree, such that each obje
 #### Toggle between viewing current state of each object
 #### Herbivores: Green => Wandering, Blue => Hunting food => Purple => Evading Predator
 #### Carnivores: Red => Wandering, Black => Hunting food
+#### Also displays perception radii
 
 ### S
 #### Export data from start of program to current (in csv)
