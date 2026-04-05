@@ -18,6 +18,11 @@ To improve algorithmic efficiency, I implemented a Quadtree, such that each obje
 #### Global1: Scan all relevant global arrays (e.g. predators only scan prey array)
 #### Global2: Scan all global arrays regardless of relevance (least efficient)
 
+### C
+#### Toggle between viewing current state of each object
+#### Herbivores: Green => Wandering, Blue => Hunting food => Purple => Evading Predator
+#### Carnivores: Red => Wandering, Black => Hunting food
+
 ### S
 #### Export data from start of program to current (in csv)
 #### IMPORTANT: REQUIRES sheetJS AS A DEPENDENCY (check below)
