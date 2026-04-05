@@ -1,4 +1,5 @@
 let debug = false;
+let debug2 = false;
 let view = "Statistics";
 
 let herbivores = [];
@@ -158,23 +159,42 @@ function draw() {
     }
   }
 
-  fill(0, 255, 0);
-  noStroke();
-  for (let p of herbivores) {
-    p.show();
-    hSize += p.size;
-    hSpeed += p.maxSpeed;
-    hAgil += p.agility;
-    hPer += p.perception;
+  if (!debug2) {
+    fill(0, 255, 0);
+    noStroke();
+    for (let p of herbivores) {
+      p.show();
+      hSize += p.size;
+      hSpeed += p.maxSpeed;
+      hAgil += p.agility;
+      hPer += p.perception;
+    }
+    fill(255, 0, 0);
+    for (let p of predators) {
+      p.show();
+      pSize += p.size;
+      pSpeed += p.maxSpeed;
+      pAgil += p.agility;
+      pPer += p.perception;
+    }
+  } else {
+    noStroke();
+    for (let p of herbivores) {
+      p.show2();
+      hSize += p.size;
+      hSpeed += p.maxSpeed;
+      hAgil += p.agility;
+      hPer += p.perception;
+    }
+    for (let p of predators) {
+      p.show2();
+      pSize += p.size;
+      pSpeed += p.maxSpeed;
+      pAgil += p.agility;
+      pPer += p.perception;
+    }
   }
-  fill(255, 0, 0);
-  for (let p of predators) {
-    p.show();
-    pSize += p.size;
-    pSpeed += p.maxSpeed;
-    pAgil += p.agility;
-    pPer += p.perception;
-  }
+
   fill(255);
   for (let p of foods) {
     p.show();
@@ -251,6 +271,10 @@ function keyPressed() {
   }
   if (key === "s") {
     saveCSV();
+  }
+  if (key === "c") {
+    if (debug2 === false) debug2 = true;
+    else debug2 = false;
   }
 }
 
