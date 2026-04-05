@@ -21,6 +21,8 @@ class Herbivore {
     this.type = "Herbivore";
 
     this.lastRepro = millis();
+    
+    this.state = 1;//Wander = 1, hunt = 2, evade = 3 
   }
 
   consumeEnergy() {
@@ -31,6 +33,21 @@ class Herbivore {
   }
 
   show() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.vel.heading());
+    beginShape();
+    vertex(8 * this.size, 0);
+    vertex(-8 * this.size, -4 * this.size);
+    vertex(-8 * this.size, 4 * this.size);
+    endShape();
+    pop();
+  }
+
+  show2() {
+    if (this.state === 1) fill(0, 255, 0);
+    else if (this.state === 2) fill(0, 255, 255);
+    else if (this.state === 3) fill(255, 0, 255);
     push();
     translate(this.pos.x, this.pos.y);
     rotate(this.vel.heading());
@@ -117,9 +134,18 @@ class Herbivore {
       }
     }
 
-    if (!target) this.wander();
-    else if (!predFlag) this.moveTowardFood(target, lowDist);
-    else this.moveFromPred(target);
+    if (!target) {
+      this.wander();
+      this.state = 1;
+    }
+    else if (!predFlag) {
+      this.moveTowardFood(target, lowDist);
+      this.state = 2;
+    }
+    else {
+      this.moveFromPred(target);
+      this.state = 3;
+    }
   }
   
   query2(array) {
@@ -154,9 +180,18 @@ class Herbivore {
       }
     }
 
-    if (!target) this.wander();
-    else if (!predFlag) this.moveTowardFood(target, lowDist);
-    else this.moveFromPred(target);
+    if (!target) {
+      this.wander();
+      this.state = 1;
+    }
+    else if (!predFlag) {
+      this.moveTowardFood(target, lowDist);
+      this.state = 2;
+    }
+    else {
+      this.moveFromPred(target);
+      this.state = 3;
+    }
   }
 
   moveTowardFood(target, distance) {
