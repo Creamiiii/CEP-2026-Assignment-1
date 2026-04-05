@@ -57,6 +57,9 @@ class Herbivore {
     vertex(-8 * this.size, 4 * this.size);
     endShape();
     pop();
+
+    fill(255);
+    ellipse(this.pos.x, this.pos.y, this.perception * 2, this.perception * 2);
   }
 
   wander() {
