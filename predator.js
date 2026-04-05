@@ -21,6 +21,8 @@ class Predator {
     this.type = "Predator";
     
     this.lastRepro = millis();
+    
+    this.state = "1"// Wander = 1, hunt = 2
   }
 
   consumeEnergy() {
@@ -31,6 +33,20 @@ class Predator {
   }
 
   show() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.vel.heading());
+    beginShape();
+    vertex(8 * this.size, 0);
+    vertex(-8 * this.size, -4 * this.size);
+    vertex(-8 * this.size, 4 * this.size);
+    endShape();
+    pop();
+  }
+
+  show2() {
+    if (this.state === 1) fill(255, 0, 0);
+    else fill(0);
     push();
     translate(this.pos.x, this.pos.y);
     rotate(this.vel.heading());
@@ -107,8 +123,14 @@ class Predator {
       }
     }
 
-    if (!target) this.wander();
-    else this.moveTowardFood(target, lowDist);
+    if (!target) {
+      this.wander();
+      this.state = 1;
+    }
+    else {
+      this.moveTowardFood(target, lowDist);
+      this.state = 2;
+    }
   }
   
   query2(array) {
@@ -133,8 +155,14 @@ class Predator {
       }
     }
 
-    if (!target) this.wander();
-    else this.moveTowardFood(target, lowDist);
+    if (!target) {
+      this.wander();
+      this.state = 1;
+    }
+    else {
+      this.moveTowardFood(target, lowDist);
+      this.state = 2;
+    }
   }
 
   moveTowardFood(target, distance) {
